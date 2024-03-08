@@ -1,0 +1,22 @@
+.node {
+  width: 25px;
+  height: 25px;
+  outline: 1px solid gray;
+  display: inline-block;
+}
+
+.node-start {
+  background-color: green;
+}
+
+.node-finish {
+  background-color: red;
+}
+
+.node-visited {
+  background-color: #ffcc00;
+}
+
+.node-wall {
+  background-color: black; /* Or any color you prefer for walls */
+}

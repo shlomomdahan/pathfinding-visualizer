@@ -37,7 +37,7 @@ const Toolbar = ({ onAction }) => {
       type: "dropdown",
       label: "Actions",
       items: [
-        { label: "Print Hi", actionKey: "printHi" },
+        { label: "Print Hi", actionKey: "None" },
         { label: "None", actionKey: "None" },
         // Additional actions can be added here
       ],

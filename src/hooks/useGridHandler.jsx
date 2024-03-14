@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { initialGrid, toggleWall } from "../utils/GridUtils";
 
-export const useGridHandler = () => {
-  const [grid, setGrid] = useState(initialGrid());
+// useGridHandler.js
+export const useGridHandler = (grid, setGrid) => {
   const [mouseIsPressed, setMouseIsPressed] = useState(false);
 
   const handleMouseDown = useCallback(
@@ -11,7 +11,7 @@ export const useGridHandler = () => {
       setGrid(newGrid);
       setMouseIsPressed(true);
     },
-    [grid]
+    [grid, setGrid]
   );
 
   const handleMouseEnter = useCallback(
@@ -20,12 +20,12 @@ export const useGridHandler = () => {
       const newGrid = toggleWall(grid, row, col);
       setGrid(newGrid);
     },
-    [grid, mouseIsPressed]
+    [grid, setGrid, mouseIsPressed]
   );
 
   const handleMouseUp = useCallback(() => {
     setMouseIsPressed(false);
   }, []);
 
-  return { grid, handleMouseDown, handleMouseEnter, handleMouseUp, setGrid };
+  return { handleMouseDown, handleMouseEnter, handleMouseUp };
 };

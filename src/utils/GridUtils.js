@@ -7,6 +7,7 @@ export const initialGrid = (rows = 20, cols = 50) => {
     }
     grid.push(currentRow);
   }
+  console.log("GRID");
   return grid;
 };
 
@@ -16,6 +17,8 @@ export const createNode = (col, row) => ({
   isStart: row === 5 && col === 5,
   isFinish: row === 15 && col === 45,
   isVisited: false,
+  isVisualized: false,
+  isPath: false,
   isWall: false,
   distance: Infinity,
   previousNode: null,
@@ -27,4 +30,20 @@ export const toggleWall = (grid, row, col) => {
   const newNode = { ...node, isWall: !node.isWall };
   newGrid[row][col] = newNode;
   return newGrid;
+};
+
+export const findStartNode = (grid) => {
+  for (const row of grid) {
+    for (const node of row) {
+      if (node.isStart) return node;
+    }
+  }
+};
+
+export const findFinishNode = (grid) => {
+  for (const row of grid) {
+    for (const node of row) {
+      if (node.isFinish) return node;
+    }
+  }
 };

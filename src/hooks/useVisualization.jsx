@@ -1,95 +1,67 @@
+// useVisualization.js
 import { useRef, useCallback } from "react";
-import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
+import { initialGrid } from "../utils/GridUtils";
 
-export const useVisualization = (grid, setGrid, initialGrid) => {
+export const useVisualization = (grid, setGrid) => {
   const timeoutIdsRef = useRef([]);
 
-  // Clear all timeouts to prevent overlapping animations
+  // Function to clear all timeouts
   const clearAllTimeouts = useCallback(() => {
     timeoutIdsRef.current.forEach(clearTimeout);
     timeoutIdsRef.current = [];
   }, []);
 
-  // Reset the grid to its initial state
-  const resetGrid = useCallback(() => {
-    clearAllTimeouts(); // Ensuring we clear timeouts when resetting the grid
-    const newGrid = initialGrid();
-    setGrid(newGrid);
-  }, [setGrid, initialGrid, clearAllTimeouts]);
-
-  // The main function to visualize the algorithm
-  const visualize = useCallback(() => {
-    clearAllTimeouts(); // Clear existing animations before starting a new one
-    const startNode = findStartNode(grid);
-    const finishNode = findFinishNode(grid);
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
-  }, [grid, setGrid, clearAllTimeouts]);
-
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        const element = document.getElementById(`node-${node.row}-${node.col}`);
-        if (element) {
-          element.className = "node node-visited";
-          if (node.isStart) {
-            element.className = "node node-start";
-          }
-          if (node.isFinish) {
-            element.className = "node node-finish";
-          }
-        }
-      }, 10 * i);
-    }
-  }
-
-  function animateShortestPath(nodesInShortestPathOrder) {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const node = nodesInShortestPathOrder[i];
-        const element = document.getElementById(`node-${node.row}-${node.col}`);
-        if (element) {
-          element.className = "node node-shortest-path";
-        }
-        if (node.isStart) {
-          element.className = "node node-start";
-        }
-        if (node.isFinish) {
-          element.className = "node node-finish";
-        }
-      }, 50 * i);
-    }
-  }
-
-  // Function to stop the visualization and reset the grid
-  const stopVisualization = useCallback(() => {
+  // Function to clear the board
+  const clearBoard = useCallback(() => {
     clearAllTimeouts();
-    resetGrid();
-  }, [clearAllTimeouts, resetGrid]);
+    setGrid(initialGrid());
+  }, [initialGrid, clearAllTimeouts]);
 
-  return { visualize, stopVisualization, resetGrid };
-};
+  // Function to animate Dijkstra's algorithm
+  const visualize = useCallback(
+    (visitedNodesInOrder, nodesInShortestPathOrder) => {
+      clearAllTimeouts();
 
-const findStartNode = (grid) => {
-  for (const row of grid) {
-    for (const node of row) {
-      if (node.isStart) return node;
-    }
-  }
-};
+      visitedNodesInOrder.forEach((node, index) => {
+        const timeoutId = setTimeout(() => {
+          setGrid((prevGrid) => {
+            const newGrid = prevGrid.map((row, rowIndex) =>
+              row.map((n, colIndex) => {
+                if (n === node) {
+                  return { ...n, isVisualized: true };
+                }
+                return n;
+              })
+            );
+            return newGrid;
+          });
+        }, 10 * index);
+        timeoutIdsRef.current.push(timeoutId);
+      });
 
-const findFinishNode = (grid) => {
-  for (const row of grid) {
-    for (const node of row) {
-      if (node.isFinish) return node;
-    }
-  }
+      // Animate shortest path
+      const totalAnimationTime = visitedNodesInOrder.length * 10;
+      nodesInShortestPathOrder.forEach((node, index) => {
+        const timeoutId = setTimeout(() => {
+          setGrid((prevGrid) => {
+            const newGrid = prevGrid.map((row) =>
+              row.map((n) => {
+                if (n.row === node.row && n.col === node.col) {
+                  // Adjusted condition
+                  return { ...n, isPath: true };
+                }
+                return n;
+              })
+            );
+            console.log("Shortest path node", node);
+            return newGrid;
+          });
+        }, totalAnimationTime + 50 * index);
+        timeoutIdsRef.current.push(timeoutId);
+      });
+    },
+    [grid, clearAllTimeouts]
+  );
+
+  return { visualize, clearBoard };
 };

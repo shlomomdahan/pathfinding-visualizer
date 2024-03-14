@@ -6,9 +6,9 @@ const Node = ({
   col,
   isStart,
   isFinish,
-  isVisited,
+  isVisualized,
+  isPath,
   isWall,
-  distance,
   onMouseDown,
   onMouseEnter,
   onMouseUp,
@@ -17,8 +17,10 @@ const Node = ({
     ? "node-finish"
     : isStart
     ? "node-start"
-    : isVisited
-    ? "node-visited"
+    : isPath
+    ? "node-shortest-path"
+    : isVisualized // Use the renamed prop here
+    ? `node-visited` // Adjust this line if you have specific class names based on status
     : isWall
     ? "node-wall"
     : "";

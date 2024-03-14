@@ -1,37 +1,51 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+// PathfindingVisualizer.jsx
+import React, { useState } from "react";
 import "./PathfindingVisualizer.css";
+import { executeAlgorithm } from "../algorithms";
 import Node from "./Node/Node";
-import { initialGrid } from "../utils/GridUtils";
+import Toolbar from "../utils/ToolBar";
 import { useGridHandler } from "../hooks/useGridHandler";
 import { useVisualization } from "../hooks/useVisualization";
-import Toolbar from "../utils/ToolBar";
+import { initialGrid, findStartNode, findFinishNode } from "../utils/GridUtils";
+import { dijkstra } from "../algorithms/dijkstra";
 
 const PathfindingVisualizer = () => {
-  const { grid, handleMouseDown, handleMouseEnter, handleMouseUp, setGrid } =
-    useGridHandler();
-
-  const { visualize, stopVisualization, resetGrid } = useVisualization(
+  const [grid, setGrid] = useState(initialGrid);
+  const { handleMouseDown, handleMouseEnter, handleMouseUp } = useGridHandler(
     grid,
-    setGrid,
-    initialGrid
+    setGrid
   );
+  const { visualize, clearBoard } = useVisualization(grid, setGrid);
 
-  const timeoutIdsRef = useRef([]);
-
-  const clearAllTimeouts = () => {
-    timeoutIdsRef.current.forEach(clearTimeout);
-    timeoutIdsRef.current = [];
+  // Available algorithms map
+  const algorithms = {
+    dijkstra: dijkstra,
+    // Add more algorithms here
   };
 
-  const printHI = () => {
-    console.log("Hi");
+  const startVisualization = (algorithmName) => {
+    const startNode = findStartNode(grid);
+    const finishNode = findFinishNode(grid);
+    const algorithm = algorithms[algorithmName];
+
+    if (!algorithm) {
+      console.error(`Algorithm ${algorithmName} not found.`);
+      return;
+    }
+
+    const { visitedNodesInOrder, nodesInShortestPathOrder } = executeAlgorithm(
+      algorithm,
+      grid,
+      startNode,
+      finishNode
+    );
+    visualize(visitedNodesInOrder, nodesInShortestPathOrder);
   };
 
   const handleToolbarAction = (actionKey) => {
     const actionMap = {
-      visualize: visualize,
-      clearBoard: resetGrid,
-      printHi: printHI,
+      visualize: () => startVisualization("dijkstra"),
+      clearBoard: clearBoard,
       // Add more action mappings here as needed
     };
 
@@ -54,9 +68,9 @@ const PathfindingVisualizer = () => {
                 row={node.row}
                 isStart={node.isStart}
                 isFinish={node.isFinish}
-                isVisited={node.isVisited}
                 isWall={node.isWall}
-                // isPath={node.isPath} // Make sure you handle this new state
+                isVisualized={node.isVisualized}
+                isPath={node.isPath}
                 onMouseDown={() => handleMouseDown(rowIdx, nodeIdx)}
                 onMouseEnter={() => handleMouseEnter(rowIdx, nodeIdx)}
                 onMouseUp={handleMouseUp}

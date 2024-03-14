@@ -7,7 +7,6 @@ export const initialGrid = (rows = 20, cols = 50) => {
     }
     grid.push(currentRow);
   }
-  console.log("GRID");
   return grid;
 };
 
@@ -46,4 +45,50 @@ export const findFinishNode = (grid) => {
       if (node.isFinish) return node;
     }
   }
+};
+
+// Example utility function implementations
+export const isStartNode = (grid, row, col) => {
+  // Implementation based on your grid structure
+  return grid[row][col].isStart;
+};
+
+export const isFinishNode = (grid, row, col) => {
+  // Implementation based on your grid structure
+  return grid[row][col].isFinish;
+};
+
+export const moveStartNode = (grid, newRow, newCol) => {
+  // Deep clone the grid to avoid direct mutations
+  const newGrid = grid.map((row) => row.map((node) => ({ ...node })));
+
+  // Utilize your existing utility to find the current start node
+  const oldStartNode = findStartNode(newGrid);
+  if (oldStartNode) {
+    oldStartNode.isStart = false; // Reset the old start node
+  }
+
+  // Directly access and set the new start node
+  const newStartNode = newGrid[newRow][newCol];
+  newStartNode.isStart = true;
+  newStartNode.isWall = false; // Ensure the start node is not a wall
+
+  return newGrid;
+};
+
+export const moveFinishNode = (grid, newRow, newCol) => {
+  // Deep clone the grid to avoid direct mutations
+  const newGrid = grid.map((row) => row.map((node) => ({ ...node })));
+
+  // Utilize your existing utility to find the current finish node
+  const oldFinishNode = findFinishNode(newGrid);
+  if (oldFinishNode) {
+    oldFinishNode.isFinish = false; // Reset the old finish node
+  }
+
+  // Directly access and set the new finish node
+  const newFinishNode = newGrid[newRow][newCol];
+  newFinishNode.isFinish = true;
+
+  return newGrid;
 };

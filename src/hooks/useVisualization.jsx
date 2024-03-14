@@ -17,17 +17,34 @@ export const useVisualization = (grid, setGrid) => {
     setGrid(initialGrid());
   }, [initialGrid, clearAllTimeouts]);
 
+  // New function in useVisualization.js to reset the grid for a new visualization
+  const resetForVisualization = useCallback(() => {
+    clearAllTimeouts();
+    setGrid((prevGrid) => {
+      return prevGrid.map((row) =>
+        row.map((node) => ({
+          ...node,
+          isVisualized: false,
+          isPath: false,
+          isVisited: false,
+          distance: Infinity,
+          previousNode: null,
+          // Optionally reset other properties but preserve walls, start, and finish
+        }))
+      );
+    });
+  }, [clearAllTimeouts, setGrid]);
+
   // Function to animate Dijkstra's algorithm
   const visualize = useCallback(
     (visitedNodesInOrder, nodesInShortestPathOrder) => {
       clearAllTimeouts();
-
       visitedNodesInOrder.forEach((node, index) => {
         const timeoutId = setTimeout(() => {
           setGrid((prevGrid) => {
             const newGrid = prevGrid.map((row, rowIndex) =>
               row.map((n, colIndex) => {
-                if (n === node) {
+                if (n.row === node.row && n.col === node.col) {
                   return { ...n, isVisualized: true };
                 }
                 return n;
@@ -53,15 +70,14 @@ export const useVisualization = (grid, setGrid) => {
                 return n;
               })
             );
-            console.log("Shortest path node", node);
             return newGrid;
           });
         }, totalAnimationTime + 50 * index);
         timeoutIdsRef.current.push(timeoutId);
       });
     },
-    [grid, clearAllTimeouts]
+    [setGrid, clearAllTimeouts]
   );
 
-  return { visualize, clearBoard };
+  return { visualize, clearBoard, resetForVisualization };
 };

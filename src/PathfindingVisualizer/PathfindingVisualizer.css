@@ -1,12 +1,20 @@
-/* body {
-  margin: 100px;
-} */
-
-.grid {
-  margin: 200px;
+.main {
+  /* Keeps .main's default flow, so Toolbar stays at the top */
+  height: 100vh;
+  background-color: rgb(231, 231, 231);
 }
 
-.main {
-  background-color: rgb(231, 231, 231);
-  height: 100vh;
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60%; /* Take the full height of .main minus Toolbar height */
+}
+
+.grid {
+  /* Set a maximum width to prevent stretching */
+  max-width: 90%; /* or whatever max-width suits your design */
+  /* Ensure the grid doesn't grow or shrink */
+  flex-grow: 0;
+  flex-shrink: 0;
 }

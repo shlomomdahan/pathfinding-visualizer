@@ -28,19 +28,19 @@ const DropdownMenu = ({ label, items, onActionSelect }) => (
 );
 
 // Toolbar component accepting onAction as a prop for handling action selection
-const Toolbar = ({ onAction }) => {
+const Toolbar = ({ onAction, selectedAlgorithm, algorithmItems }) => {
   // Toolbar configuration, potentially fetched or modified dynamically
-  const toolbarItems = [
-    { type: "button", label: "Visualize", actionKey: "visualize" },
+  let toolbarItems = [
+    {
+      type: "button",
+      label: `Visualize ${selectedAlgorithm}`,
+      actionKey: "visualize",
+    },
     { type: "button", label: "Clear Board", actionKey: "clearBoard" },
     {
       type: "dropdown",
-      label: "Actions",
-      items: [
-        { label: "Print Hi", actionKey: "None" },
-        { label: "None", actionKey: "None" },
-        // Additional actions can be added here
-      ],
+      label: "Select Algorithm",
+      items: algorithmItems,
     },
   ];
 
@@ -62,7 +62,9 @@ const Toolbar = ({ onAction }) => {
                 key={index}
                 label={item.label}
                 items={item.items}
-                onActionSelect={onAction}
+                onActionSelect={(actionKey) => {
+                  onAction(actionKey);
+                }}
               />
             );
           default:

@@ -5,3 +5,8 @@ body {
 .grid {
   margin: 100px;
 }
+
+.main {
+  background-color: rgb(231, 231, 231);
+  height: 100vh;
+}

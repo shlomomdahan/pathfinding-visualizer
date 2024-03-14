@@ -2,10 +2,13 @@ import React from "react";
 import "./Node.css";
 
 const Node = ({
+  row,
+  col,
   isStart,
   isFinish,
   isVisited,
   isWall,
+  distance,
   onMouseDown,
   onMouseEnter,
   onMouseUp,
@@ -22,6 +25,7 @@ const Node = ({
 
   return (
     <div
+      id={`node-${row}-${col}`} // Add the unique ID here
       className={`node ${extraClassName}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}

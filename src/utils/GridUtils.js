@@ -17,6 +17,8 @@ export const createNode = (col, row) => ({
   isFinish: row === 15 && col === 45,
   isVisited: false,
   isWall: false,
+  distance: Infinity,
+  previousNode: null,
 });
 
 export const toggleWall = (grid, row, col) => {

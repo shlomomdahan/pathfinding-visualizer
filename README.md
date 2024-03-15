@@ -1,3 +1,15 @@
+# Pathfinding Visualizer
+
+This project is a visual representation of various pathfinding algorithms in action, built using React. It's designed to help users understand how different pathfinding algorithms work, including Dijkstra, A*, Breadth-First Search (BFS), and Depth-First Search (DFS). Users can visualize the process of searching for the shortest path between two points in a maze-like grid, interact with the grid to set start and end points, and observe how walls and weights affect the pathfinding process.
+
+## Features
+
+- **Visualize Algorithms**: See how Dijkstra, A*, BFS, and DFS algorithms find the shortest path.
+- **Interactive Grid**: Click and drag to set start and end nodes, create walls, and add weights.
+- **Algorithm and Maze Generation**: Select different algorithms and maze generation techniques.
+- **Step-by-Step and Speed Control**: Control the visualization speed and step through the algorithm's process.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

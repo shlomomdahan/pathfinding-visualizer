@@ -10,7 +10,7 @@ This project is a visual representation of various pathfinding algorithms in act
 - **Step-by-Step and Speed Control**: Control the visualization speed and step through the algorithm's process.
 
 ```markdown
-![Pathfinding Visualizer Demo]pathfinder.gif
+![Pathfinding Visualizer Demo](pathfinder.gif)
 ```
 # Getting Started with Create React App
 

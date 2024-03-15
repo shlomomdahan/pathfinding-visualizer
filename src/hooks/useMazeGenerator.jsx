@@ -15,6 +15,24 @@ export const useMazeGenerator = (grid, setGrid) => {
     );
   }, [setGrid]);
 
+  const generateWeightedMaze = useCallback(() => {
+    setGrid((prevGrid) => {
+      return prevGrid.map((row) =>
+        row.map((node) => {
+          // Avoid altering the start, finish, or wall nodes
+          if (node.isStart || node.isFinish || node.isWall) return node;
+
+          // Randomly decide to assign a high weight to some nodes
+          const assignHighWeight = Math.random() < 0.2; // 20% chance for simplicity
+          if (assignHighWeight) {
+            return { ...node, weight: Math.floor(Math.random() * 20) + 20 }; // Weights between 10 and 29
+          }
+          return node;
+        })
+      );
+    });
+  }, [setGrid]);
+
   const generateRecursiveDivisionMaze = useCallback(() => {
     setGrid((prevGrid) => {
       // Initialize the grid, preserving the start and finish nodes
@@ -136,5 +154,9 @@ export const useMazeGenerator = (grid, setGrid) => {
     []
   );
 
-  return { randomizeBoard, generateRecursiveDivisionMaze };
+  return {
+    randomizeBoard,
+    generateWeightedMaze,
+    generateRecursiveDivisionMaze,
+  };
 };

@@ -1,16 +1,31 @@
-export const initialGrid = (rows = 30, cols = 50) => {
+// export const initialGrid = (rows = 30, cols = 50) => {
+//   const grid = [];
+//   for (let row = 0; row < rows; row++) {
+//     const currentRow = [];
+//     for (let col = 0; col < cols; col++) {
+//       currentRow.push(createNode(col, row));
+//     }
+//     grid.push(currentRow);
+//   }
+//   return grid;
+// };
+
+const NUM_ROWS = 30;
+const NUM_COLS = 50;
+
+export function initialGrid() {
   const grid = [];
-  for (let row = 0; row < rows; row++) {
+  for (let row = 0; row < NUM_ROWS; row++) {
     const currentRow = [];
-    for (let col = 0; col < cols; col++) {
+    for (let col = 0; col < NUM_COLS; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);
   }
   return grid;
-};
+}
 
-export const createNode = (col, row) => ({
+export const createNode = (col, row, isWeightedGraph) => ({
   col,
   row,
   isStart: row === 5 && col === 5,
@@ -21,6 +36,7 @@ export const createNode = (col, row) => ({
   isWall: false,
   distance: Infinity,
   previousNode: null,
+  weight: 1,
 });
 
 export const toggleWall = (grid, row, col) => {

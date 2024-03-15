@@ -11,3 +11,30 @@
   color: #333;
   font-size: 20px;
 }
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(197, 213, 251);
+  padding: 20px;
+  z-index: 1000; /* Ensure it's above other content */
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 75%;
+  overflow-y: auto;
+  border-radius: 20px;
+}
+
+.modal-toggle {
+  position: fixed;
+  right: 40px;
+  top: 10px;
+  z-index: 1001; /* Above the modal */
+}
+
+.modal-close {
+  float: right;
+  cursor: pointer;
+}

@@ -1,0 +1,44 @@
+/* AlgorithmStats.css */
+.algorithm-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.stat-item {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px; /* Fixed width for consistent sizing */
+  height: 50px; /* Fixed height to ensure uniformity */
+  justify-content: space-around; /* Distributes space evenly */
+}
+
+.stat-label {
+  color: #666;
+  font-size: 16px;
+}
+
+.stat-value {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Optional: If you use icons */
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 10px;
+}

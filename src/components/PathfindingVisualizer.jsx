@@ -1,8 +1,8 @@
 // PathfindingVisualizer.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./PathfindingVisualizer.css";
 import { executeAlgorithm } from "../algorithms";
-import Node from "./Node/Node";
+import Node from "./Node";
 import Toolbar from "../utils/ToolBar";
 import { useGridHandler } from "../hooks/useGridHandler";
 import { useVisualization } from "../hooks/useVisualization";
@@ -12,6 +12,9 @@ import { dijkstra } from "../algorithms/dijkstra";
 import { dfs } from "../algorithms/dfs";
 import { bfs } from "../algorithms/bfs";
 import { astar } from "../algorithms/astar";
+import WeightLegend from "../components/weightLegend";
+import AlgorithmStats from "./algorithmStats";
+import Description from "./Description";
 
 const algorithms = [
   { label: "Dijkstra", actionKey: "dijkstra", func: dijkstra },
@@ -26,6 +29,7 @@ const mazeOptions = [
     label: "Recursive Division Maze",
     actionKey: "generateRecursiveDivisionMaze",
   },
+  { label: "Random Weighted Maze", actionKey: "generateWeightedMaze" },
 ];
 
 const PathfindingVisualizer = () => {
@@ -34,15 +38,23 @@ const PathfindingVisualizer = () => {
     grid,
     setGrid
   );
-  const { visualize, clearBoard, resetForVisualization } = useVisualization(
-    grid,
-    setGrid
-  );
+  const {
+    visualize,
+    clearBoard,
+    clearWeightedBoard,
+    resetForVisualization,
+    resetForMaze,
+  } = useVisualization(grid, setGrid);
 
-  const { randomizeBoard, generateRecursiveDivisionMaze } = useMazeGenerator(
-    grid,
-    setGrid
-  );
+  const {
+    randomizeBoard,
+    generateWeightedMaze,
+    generateRecursiveDivisionMaze,
+  } = useMazeGenerator(grid, setGrid);
+  const [isWeightedGraph, setIsWeightedGraph] = useState(false);
+
+  const [runtime, setRuntime] = useState(0);
+  const [pathCost, setPathCost] = useState(0);
 
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]); // Default to Dijkstra object
   const handleToolbarAction = (actionKey) => {
@@ -51,12 +63,16 @@ const PathfindingVisualizer = () => {
         clearBoard();
         break;
       case "randomizeBoard":
-        resetForVisualization();
+        resetForMaze();
         randomizeBoard(); // Assuming this generates a random maze
         break;
       case "generateRecursiveDivisionMaze":
-        resetForVisualization();
+        resetForMaze();
         generateRecursiveDivisionMaze();
+        break;
+      case "generateWeightedMaze":
+        resetForMaze();
+        generateWeightedMaze();
         break;
       case "visualize":
         resetForVisualization();
@@ -86,7 +102,10 @@ const PathfindingVisualizer = () => {
       return;
     }
 
+    const startTime = performance.now(); // Start timing
     const result = executeAlgorithm(algorithmFunc, grid, startNode, finishNode);
+    const endTime = performance.now(); // End timing
+
     if (
       !result ||
       !result.visitedNodesInOrder ||
@@ -95,6 +114,16 @@ const PathfindingVisualizer = () => {
       console.error("Algorithm did not return expected result.");
       return; // Exit to avoid calling visualize with undefined values
     }
+
+    const runtime = endTime - startTime;
+    const pathCost = result.nodesInShortestPathOrder.reduce(
+      (acc, node) => acc + node.weight,
+      0
+    );
+
+    setRuntime(runtime);
+    setPathCost(pathCost);
+
     visualize(result.visitedNodesInOrder, result.nodesInShortestPathOrder);
   };
 
@@ -108,7 +137,12 @@ const PathfindingVisualizer = () => {
           actionKey: `algo-${algo.actionKey}`,
         }))}
         mazeItems={mazeOptions} // Pass the maze options here
+        // isWeightedGraph={isWeightedGraph}
       />
+      <div className="dashboard">
+        <AlgorithmStats runtime={runtime} pathCost={pathCost} />
+        <WeightLegend />
+      </div>
       <div className="grid-wrapper">
         {" "}
         {/* New wrapper for the grid */}
@@ -126,8 +160,12 @@ const PathfindingVisualizer = () => {
                   isVisualized={node.isVisualized}
                   isPath={node.isPath}
                   distance={node.distance}
-                  onMouseDown={() => handleMouseDown(rowIdx, nodeIdx)}
-                  onMouseEnter={() => handleMouseEnter(rowIdx, nodeIdx)}
+                  weight={node.weight}
+                  // onMouseDown={() => handleMouseDown(rowIdx, nodeIdx)}
+                  onMouseDown={(event) =>
+                    handleMouseDown(event, rowIdx, nodeIdx)
+                  }
+                  onMouseEnter={(event) => handleMouseEnter(rowIdx, nodeIdx)}
                   onMouseUp={handleMouseUp}
                 />
               ))}

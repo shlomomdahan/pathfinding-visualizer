@@ -2,8 +2,10 @@ import React from "react";
 import "./ToolBar.css"; // Ensure your CSS file is set up for styling
 
 // Button component
-const Button = ({ label, onClick }) => (
-  <button onClick={onClick}>{label}</button>
+const Button = ({ label, onClick, className }) => (
+  <button className={`button ${className}`} onClick={onClick}>
+    {label}
+  </button>
 );
 
 // DropdownMenu component
@@ -33,6 +35,7 @@ const Toolbar = ({
   selectedAlgorithm,
   algorithmItems,
   mazeItems,
+  isWeightedGraph,
 }) => {
   // Toolbar configuration, potentially fetched or modified dynamically
   let toolbarItems = [
@@ -40,18 +43,37 @@ const Toolbar = ({
       type: "button",
       label: `Visualize ${selectedAlgorithm}`,
       actionKey: "visualize",
+      className: "visualize-button",
     },
-    { type: "button", label: "Clear Board", actionKey: "clearBoard" },
+    {
+      type: "button",
+      label: "Clear Board",
+      actionKey: "clearBoard",
+      className: "clear-board-button",
+    },
     {
       type: "dropdown",
       label: "Mazes",
       items: mazeItems,
+      className: "maze-dropdown",
     },
     {
       type: "dropdown",
       label: "Select Algorithm",
       items: algorithmItems,
+      className: "algorithm-dropdown",
     },
+
+    // {
+    //   type: "button",
+    //   label: isWeightedGraph
+    //     ? "Disable Weighted Graph"
+    //     : "Enable Weighted Graph",
+    //   actionKey: "toggleWeightedGraph",
+    //   className: isWeightedGraph
+    //     ? "weighted-graph-button"
+    //     : "unweighted-graph-button",
+    // },
   ];
 
   return (
@@ -64,6 +86,7 @@ const Toolbar = ({
                 key={index}
                 label={item.label}
                 onClick={() => onAction(item.actionKey)}
+                className={item.className}
               />
             );
           case "dropdown":

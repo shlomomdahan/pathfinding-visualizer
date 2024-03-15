@@ -33,6 +33,42 @@ export const useVisualization = (grid, setGrid) => {
     });
   }, [clearAllTimeouts, setGrid]);
 
+  const resetForMaze = useCallback(() => {
+    clearAllTimeouts();
+    setGrid((prevGrid) => {
+      return prevGrid.map((row) =>
+        row.map((node) => ({
+          ...node,
+          isVisualized: false,
+          isPath: false,
+          isVisited: false,
+          distance: Infinity,
+          previousNode: null,
+          isWall: false,
+          weight: 1,
+        }))
+      );
+    });
+  }, [clearAllTimeouts, setGrid]);
+
+  const clearWeightedBoard = useCallback(() => {
+    clearAllTimeouts();
+    setGrid((prevGrid) =>
+      prevGrid.map((row) =>
+        row.map((node) => ({
+          ...node,
+          isWall: false,
+          isVisited: false,
+          isPath: false,
+          distance: Infinity,
+          isVisualized: false,
+          isVisited: false,
+          previousNode: null,
+        }))
+      )
+    );
+  }, [clearAllTimeouts, setGrid]);
+
   // Function to animate Dijkstra's algorithm
   const visualize = useCallback(
     (visitedNodesInOrder, nodesInShortestPathOrder) => {
@@ -77,5 +113,11 @@ export const useVisualization = (grid, setGrid) => {
     [setGrid, clearAllTimeouts]
   );
 
-  return { visualize, clearBoard, resetForVisualization };
+  return {
+    visualize,
+    clearBoard,
+    clearWeightedBoard,
+    resetForVisualization,
+    resetForMaze,
+  };
 };

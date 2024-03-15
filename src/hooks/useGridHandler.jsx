@@ -1,7 +1,5 @@
 import { useState, useCallback } from "react";
 
-// Assuming initialGrid, toggleWall, and additional utilities are defined
-// Add utilities to identify and move start/finish nodes
 import {
   initialGrid,
   toggleWall,
@@ -13,22 +11,30 @@ import {
 
 export const useGridHandler = (grid, setGrid) => {
   const [mouseIsPressed, setMouseIsPressed] = useState(false);
-  const [nodeBeingDragged, setNodeBeingDragged] = useState(null); // New state to track if we're dragging start/finish
+  const [actionType, setActionType] = useState(null);
 
   const handleMouseDown = useCallback(
-    (row, col) => {
-      if (isStartNode(grid, row, col) || isFinishNode(grid, row, col)) {
-        // Identify if the clicked node is start or finish
-        setNodeBeingDragged({
-          type: isStartNode(grid, row, col) ? "start" : "finish",
-          row,
-          col,
-        });
+    (event, row, col) => {
+      setMouseIsPressed(true);
+      if (event.shiftKey) {
+        // If Shift is pressed, set the weight of the node to 30
+        setActionType("setWeight");
+        const newGrid = grid.map((gridRow, gridRowIndex) =>
+          gridRow.map((node, nodeColIndex) => {
+            if (gridRowIndex === row && nodeColIndex === col) {
+              return { ...node, weight: 30 }; // Setting weight to 30
+            }
+            return node;
+          })
+        );
+        setGrid(newGrid);
+      } else if (isStartNode(grid, row, col) || isFinishNode(grid, row, col)) {
+        setActionType(isStartNode(grid, row, col) ? "moveStart" : "moveFinish");
       } else {
+        setActionType("toggleWall");
         const newGrid = toggleWall(grid, row, col);
         setGrid(newGrid);
       }
-      setMouseIsPressed(true);
     },
     [grid, setGrid]
   );
@@ -36,25 +42,37 @@ export const useGridHandler = (grid, setGrid) => {
   const handleMouseEnter = useCallback(
     (row, col) => {
       if (!mouseIsPressed) return;
-      if (nodeBeingDragged) {
-        // If we're dragging a start/finish node, move it
-        const newGrid =
-          nodeBeingDragged.type === "start"
-            ? moveStartNode(grid, row, col)
-            : moveFinishNode(grid, row, col);
-        setGrid(newGrid);
-      } else {
-        // Regular wall toggle behavior
-        const newGrid = toggleWall(grid, row, col);
-        setGrid(newGrid);
+      let newGrid;
+      switch (actionType) {
+        case "setWeight":
+          newGrid = grid.map((gridRow, gridRowIndex) =>
+            gridRow.map((node, nodeColIndex) => {
+              if (gridRowIndex === row && nodeColIndex === col) {
+                return { ...node, weight: 30 }; // Set weight to 30 for drag over
+              }
+              return node;
+            })
+          );
+          break;
+        case "moveStart":
+        case "moveFinish":
+          newGrid =
+            actionType === "moveStart"
+              ? moveStartNode(grid, row, col)
+              : moveFinishNode(grid, row, col);
+          break;
+        case "toggleWall":
+        default:
+          newGrid = toggleWall(grid, row, col);
       }
+      setGrid(newGrid);
     },
-    [grid, setGrid, mouseIsPressed, nodeBeingDragged]
+    [grid, setGrid, mouseIsPressed, actionType]
   );
 
   const handleMouseUp = useCallback(() => {
     setMouseIsPressed(false);
-    setNodeBeingDragged(null); // Reset dragging state
+    setActionType(null); // Reset action type
   }, []);
 
   return { handleMouseDown, handleMouseEnter, handleMouseUp };

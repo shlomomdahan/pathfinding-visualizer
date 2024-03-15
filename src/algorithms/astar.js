@@ -30,7 +30,8 @@ export function astar(grid, startNode, finishNode) {
         continue;
       }
 
-      const gScore = currentNode.g + 1;
+      // const gScore = currentNode.g + 1;
+      const gScore = currentNode.g + neighbor.weight;
       if (gScore < neighbor.g) {
         neighbor.h = heuristic(neighbor, finish);
         neighbor.previousNode = currentNode;
@@ -59,6 +60,7 @@ function createAStarGrid(grid) {
         x: rowIndex, // Adding x coordinate for clarity
         y: colIndex, // Adding y coordinate for clarity
         isOpened: false, // Track whether the node is in the open list
+        weight: cell.weight || 1,
       };
     });
   });

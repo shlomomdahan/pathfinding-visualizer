@@ -1,0 +1,50 @@
+.weight-legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin-top: 0px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Matching gradient */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #ddd;
+  width: auto; /* Adjust width as needed */
+  height: 100px; /* Adjust height based on content */
+}
+
+.weight-steps {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px 0; /* Adds some vertical padding */
+}
+
+.weight-step {
+  width: 30px; /* Slightly larger for better visibility */
+  height: 30px; /* Keeps it square but larger than before */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Increased for readability */
+  border-radius: 4px; /* Adds rounded corners */
+  background-color: #e0e0e0; /* A neutral color to distinguish the steps */
+  color: #333; /* Darker text for better contrast */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle inset shadow for depth */
+}
+
+/* Add some responsive adjustments if necessary */
+@media (max-width: 768px) {
+  .weight-legend {
+    padding: 10px;
+  }
+
+  .weight-steps {
+    gap: 8px;
+  }
+
+  .weight-step {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+}

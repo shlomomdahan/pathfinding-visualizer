@@ -9,7 +9,9 @@ This project is a visual representation of various pathfinding algorithms in act
 - **Algorithm and Maze Generation**: Select different algorithms and maze generation techniques.
 - **Step-by-Step and Speed Control**: Control the visualization speed and step through the algorithm's process.
 
-
+```markdown
+![Pathfinding Visualizer Demo]
+```
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

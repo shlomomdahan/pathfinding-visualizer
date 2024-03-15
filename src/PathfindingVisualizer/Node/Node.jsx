@@ -9,6 +9,7 @@ const Node = ({
   isVisualized,
   isPath,
   isWall,
+  distance,
   onMouseDown,
   onMouseEnter,
   onMouseUp,
@@ -27,11 +28,12 @@ const Node = ({
 
   return (
     <div
-      id={`node-${row}-${col}`} // Add the unique ID here
+      id={`node-${row}-${col}`}
       className={`node ${extraClassName}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
       onMouseUp={onMouseUp}
+      data-distance={distance}
     ></div>
   );
 };

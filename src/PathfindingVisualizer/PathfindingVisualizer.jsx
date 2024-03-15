@@ -11,16 +11,17 @@ import { initialGrid, findStartNode, findFinishNode } from "../utils/GridUtils";
 import { dijkstra } from "../algorithms/dijkstra";
 import { dfs } from "../algorithms/dfs";
 import { bfs } from "../algorithms/bfs";
+import { astar } from "../algorithms/astar";
 
 const algorithms = [
   { label: "Dijkstra", actionKey: "dijkstra", func: dijkstra },
-  { label: "A*", actionKey: "astar", func: null },
+  { label: "A*", actionKey: "astar", func: astar },
   { label: "Breadth First Search", actionKey: "bfs", func: bfs },
   { label: "Depth First Search", actionKey: "dfs", func: dfs },
 ];
 
 const mazeOptions = [
-  { label: "Random Maze", actionKey: "randomizeBoard" },
+  { label: "Randomize Board", actionKey: "randomizeBoard" },
   {
     label: "Recursive Division Maze",
     actionKey: "generateRecursiveDivisionMaze",
@@ -50,9 +51,11 @@ const PathfindingVisualizer = () => {
         clearBoard();
         break;
       case "randomizeBoard":
+        resetForVisualization();
         randomizeBoard(); // Assuming this generates a random maze
         break;
       case "generateRecursiveDivisionMaze":
+        resetForVisualization();
         generateRecursiveDivisionMaze();
         break;
       case "visualize":
@@ -106,7 +109,6 @@ const PathfindingVisualizer = () => {
         }))}
         mazeItems={mazeOptions} // Pass the maze options here
       />
-
       <div className="grid-wrapper">
         {" "}
         {/* New wrapper for the grid */}
@@ -123,6 +125,7 @@ const PathfindingVisualizer = () => {
                   isWall={node.isWall}
                   isVisualized={node.isVisualized}
                   isPath={node.isPath}
+                  distance={node.distance}
                   onMouseDown={() => handleMouseDown(rowIdx, nodeIdx)}
                   onMouseEnter={() => handleMouseEnter(rowIdx, nodeIdx)}
                   onMouseUp={handleMouseUp}
@@ -132,15 +135,21 @@ const PathfindingVisualizer = () => {
           ))}
         </div>
       </div>
-      <h1
-        style={{
-          textAlign: "center",
-          marginTop: "10px",
-          color: "Black",
-        }}
-      >
-        Pathfinding Visualizer
-      </h1>
+      <div className="footer">
+        <h1>Pathfinding Visualizer</h1>
+        <div className="link-img-container">
+          <a href="https://github.com/shlomomdahan/pathfinding-visualizer">
+            Source Code
+          </a>
+          <img
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            alt="GitHub"
+            width="30"
+            height="30"
+          />
+          <h5 className="name">by Shlomo Dahan</h5>
+        </div>
+      </div>
     </div>
   );
 };

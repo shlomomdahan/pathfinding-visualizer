@@ -43,7 +43,7 @@ export const useVisualization = (grid, setGrid) => {
             const newGrid = prevGrid.map((row, rowIndex) =>
               row.map((n, colIndex) => {
                 if (n.row === node.row && n.col === node.col) {
-                  return { ...n, isVisualized: true };
+                  return { ...n, isVisualized: true, distance: node.distance };
                 }
                 return n;
               })
@@ -63,7 +63,7 @@ export const useVisualization = (grid, setGrid) => {
               row.map((n) => {
                 if (n.row === node.row && n.col === node.col) {
                   // Adjusted condition
-                  return { ...n, isPath: true };
+                  return { ...n, isPath: true, distance: node.distance };
                 }
                 return n;
               })

@@ -17,7 +17,6 @@ export const useVisualization = (grid, setGrid) => {
     setGrid(initialGrid());
   }, [initialGrid, clearAllTimeouts]);
 
-  // New function in useVisualization.js to reset the grid for a new visualization
   const resetForVisualization = useCallback(() => {
     clearAllTimeouts();
     setGrid((prevGrid) => {
@@ -29,7 +28,6 @@ export const useVisualization = (grid, setGrid) => {
           isVisited: false,
           distance: Infinity,
           previousNode: null,
-          // Optionally reset other properties but preserve walls, start, and finish
         }))
       );
     });

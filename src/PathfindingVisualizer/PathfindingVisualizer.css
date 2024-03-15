@@ -4,17 +4,24 @@
   background-color: rgb(231, 231, 231);
 }
 
-.grid-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60%; /* Take the full height of .main minus Toolbar height */
-}
-
 .grid {
   /* Set a maximum width to prevent stretching */
   max-width: 90%; /* or whatever max-width suits your design */
   /* Ensure the grid doesn't grow or shrink */
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensures it fills the available horizontal space */
+  flex-grow: 1; /* Allows it to expand to fill available vertical space */
+  padding: 20px; /* Adds padding around the grid for spacing from the edges */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
+  background-color: white; /* Contrast with main background */
+  margin-top: 20px; /* Adds a bit of space between the toolbar and grid */
+  border-radius: 8px; /* Softens edges */
+  overflow: hidden; /* Ensures content fits within the rounded corners */
 }

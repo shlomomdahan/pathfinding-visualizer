@@ -1,79 +1,61 @@
 .node {
   width: 25px;
   height: 25px;
-  outline: 1px solid rgb(169, 186, 227);
+  outline: 1px solid rgb(200, 200, 200);
   display: inline-block;
+  transition: background-color 0.3s ease;
 }
 
 .node-finish {
-  background-color: red;
+  background-color: #e74c3c;
 }
 
 .node-start {
-  background-color: green;
+  background-color: #2ecc71;
+}
+
+.node-wall {
+  background-color: #34495e;
 }
 
 .node-visited {
-  animation-name: visitedAnimation;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-  animation-delay: 0;
-  animation-direction: alternate;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
+  animation: visitedAnimation 1.5s ease-out forwards;
 }
 
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
+    background-color: rgba(41, 128, 185, 0.75);
     border-radius: 100%;
   }
-
   50% {
-    background-color: rgba(73, 180, 98, 0.75);
+    background-color: rgba(39, 174, 96, 0.75);
   }
-
   75% {
     transform: scale(1.2);
-    background-color: rgba(233, 188, 39, 0.75);
+    background-color: rgba(241, 196, 15, 0.75);
   }
-
   100% {
     transform: scale(1);
-    background-color: rgba(150, 84, 169, 0.75);
+    background-color: rgba(155, 89, 182, 0.75);
   }
-}
-
-.node-wall {
-  background-color: rgb(12, 53, 71);
 }
 
 .node-shortest-path {
-  animation-name: shortestPath;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-  animation-delay: 0;
-  animation-direction: alternate;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
+  animation: shortestPathAnimation 1.5s ease-out forwards;
 }
 
-@keyframes shortestPath {
+@keyframes shortestPathAnimation {
   0% {
     transform: scale(0.6);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 223, 76);
   }
-
   50% {
     transform: scale(1.2);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 223, 76);
   }
-
   100% {
     transform: scale(1);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 223, 76);
   }
 }

@@ -6,6 +6,7 @@ import Node from "./Node/Node";
 import Toolbar from "../utils/ToolBar";
 import { useGridHandler } from "../hooks/useGridHandler";
 import { useVisualization } from "../hooks/useVisualization";
+import { useMazeGenerator } from "../hooks/useMazeGenerator";
 import { initialGrid, findStartNode, findFinishNode } from "../utils/GridUtils";
 import { dijkstra } from "../algorithms/dijkstra";
 import { dfs } from "../algorithms/dfs";
@@ -16,6 +17,14 @@ const algorithms = [
   { label: "A*", actionKey: "astar", func: null },
   { label: "Breadth First Search", actionKey: "bfs", func: bfs },
   { label: "Depth First Search", actionKey: "dfs", func: dfs },
+];
+
+const mazeOptions = [
+  { label: "Random Maze", actionKey: "randomizeBoard" },
+  {
+    label: "Recursive Division Maze",
+    actionKey: "generateRecursiveDivisionMaze",
+  },
 ];
 
 const PathfindingVisualizer = () => {
@@ -29,22 +38,39 @@ const PathfindingVisualizer = () => {
     setGrid
   );
 
+  const { randomizeBoard, generateRecursiveDivisionMaze } = useMazeGenerator(
+    grid,
+    setGrid
+  );
+
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]); // Default to Dijkstra object
 
   const handleToolbarAction = (actionKey) => {
-    if (actionKey === "clearBoard") {
-      clearBoard();
-    } else if (actionKey.startsWith("algo-")) {
-      const algorithmKey = actionKey.replace("algo-", "");
-      const selectedAlgorithm = algorithms.find(
-        (algo) => algo.actionKey === algorithmKey
-      );
-      if (selectedAlgorithm) {
-        setSelectedAlgorithm(selectedAlgorithm);
-      }
-    } else if (actionKey === "visualize") {
-      resetForVisualization();
-      startVisualization(selectedAlgorithm.actionKey); // Use the action key from the selected algorithm object
+    switch (actionKey) {
+      case "clearBoard":
+        clearBoard();
+        break;
+      case "randomizeBoard":
+        randomizeBoard(); // Assuming this generates a random maze
+        break;
+      case "generateRecursiveDivisionMaze":
+        generateRecursiveDivisionMaze();
+        break;
+      case "visualize":
+        resetForVisualization();
+        startVisualization(selectedAlgorithm.actionKey);
+        break;
+      default:
+        if (actionKey.startsWith("algo-")) {
+          const algorithmKey = actionKey.replace("algo-", "");
+          const selected = algorithms.find(
+            (algo) => algo.actionKey === algorithmKey
+          );
+          if (selected) {
+            setSelectedAlgorithm(selected);
+          }
+        }
+        break;
     }
   };
 
@@ -79,7 +105,9 @@ const PathfindingVisualizer = () => {
           label: algo.label,
           actionKey: `algo-${algo.actionKey}`,
         }))}
+        mazeItems={mazeOptions} // Pass the maze options here
       />
+
       <div className="grid-wrapper">
         {" "}
         {/* New wrapper for the grid */}

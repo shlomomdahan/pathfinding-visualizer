@@ -28,7 +28,12 @@ const DropdownMenu = ({ label, items, onActionSelect }) => (
 );
 
 // Toolbar component accepting onAction as a prop for handling action selection
-const Toolbar = ({ onAction, selectedAlgorithm, algorithmItems }) => {
+const Toolbar = ({
+  onAction,
+  selectedAlgorithm,
+  algorithmItems,
+  mazeItems,
+}) => {
   // Toolbar configuration, potentially fetched or modified dynamically
   let toolbarItems = [
     {
@@ -37,6 +42,11 @@ const Toolbar = ({ onAction, selectedAlgorithm, algorithmItems }) => {
       actionKey: "visualize",
     },
     { type: "button", label: "Clear Board", actionKey: "clearBoard" },
+    {
+      type: "dropdown",
+      label: "Mazes",
+      items: mazeItems,
+    },
     {
       type: "dropdown",
       label: "Select Algorithm",

@@ -1,4 +1,4 @@
-export const initialGrid = (rows = 20, cols = 50) => {
+export const initialGrid = (rows = 30, cols = 50) => {
   const grid = [];
   for (let row = 0; row < rows; row++) {
     const currentRow = [];
@@ -14,7 +14,7 @@ export const createNode = (col, row) => ({
   col,
   row,
   isStart: row === 5 && col === 5,
-  isFinish: row === 15 && col === 45,
+  isFinish: row === 25 && col === 45,
   isVisited: false,
   isVisualized: false,
   isPath: false,

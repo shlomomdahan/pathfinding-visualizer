@@ -1,13 +1,11 @@
 .main {
-  /* Keeps .main's default flow, so Toolbar stays at the top */
   height: 100vh;
   background-color: rgb(231, 231, 231);
 }
 
 .grid {
-  /* Set a maximum width to prevent stretching */
-  max-width: 90%; /* or whatever max-width suits your design */
-  /* Ensure the grid doesn't grow or shrink */
+  max-width: 100%;
+  margin: 50px 0 60px 0;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -16,12 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Ensures it fills the available horizontal space */
-  flex-grow: 1; /* Allows it to expand to fill available vertical space */
-  padding: 20px; /* Adds padding around the grid for spacing from the edges */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
-  background-color: white; /* Contrast with main background */
-  margin-top: 20px; /* Adds a bit of space between the toolbar and grid */
-  border-radius: 8px; /* Softens edges */
-  overflow: hidden; /* Ensures content fits within the rounded corners */
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  overflow: hidden;
 }

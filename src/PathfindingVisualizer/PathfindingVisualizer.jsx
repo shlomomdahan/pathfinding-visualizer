@@ -44,7 +44,6 @@ const PathfindingVisualizer = () => {
   );
 
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]); // Default to Dijkstra object
-
   const handleToolbarAction = (actionKey) => {
     switch (actionKey) {
       case "clearBoard":

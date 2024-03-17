@@ -38,13 +38,8 @@ const PathfindingVisualizer = () => {
     grid,
     setGrid
   );
-  const {
-    visualize,
-    clearBoard,
-    clearWeightedBoard,
-    resetForVisualization,
-    resetForMaze,
-  } = useVisualization(grid, setGrid);
+  const { visualize, clearBoard, resetForVisualization, resetForMaze } =
+    useVisualization(grid, setGrid);
 
   const {
     randomizeBoard,
@@ -61,6 +56,9 @@ const PathfindingVisualizer = () => {
     switch (actionKey) {
       case "clearBoard":
         clearBoard();
+        break;
+      case "clearPath":
+        resetForVisualization();
         break;
       case "randomizeBoard":
         resetForMaze();

@@ -1,44 +1,59 @@
-/* AlgorithmStats.css */
 .algorithm-stats {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-
+  gap: 30px;
   padding: 20px;
   background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e0e0e0;
 }
 
 .stat-item {
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 25px 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100px; /* Fixed width for consistent sizing */
-  height: 50px; /* Fixed height to ensure uniformity */
-  justify-content: space-around; /* Distributes space evenly */
+  min-width: 120px;
+  min-height: 70px;
+  justify-content: space-around;
 }
 
 .stat-label {
-  color: #666;
-  font-size: 16px;
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .stat-value {
-  color: #333;
-  font-size: 20px;
-  font-weight: bold;
+  color: #222;
+  font-size: 22px;
+  font-weight: 600;
 }
 
-/* Optional: If you use icons */
+@media (max-width: 768px) {
+  .algorithm-stats {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .stat-item {
+    width: auto;
+    padding: 20px;
+  }
+
+  .stat-label,
+  .stat-value {
+    text-align: center;
+  }
+}
+
 .stat-icon {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 10px;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 15px;
 }

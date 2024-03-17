@@ -17,6 +17,41 @@ export const useVisualization = (grid, setGrid) => {
     setGrid(initialGrid());
   }, [initialGrid, clearAllTimeouts]);
 
+  const clearWeights = useCallback(() => {
+    clearAllTimeouts();
+    setGrid((prevGrid) =>
+      prevGrid.map((row) =>
+        row.map((node) => ({
+          ...node,
+          // isPath: false,
+          // distance: Infinity,
+          // isVisualized: false,
+          // isVisited: false,
+          // previousNode: null,
+          weight: 1,
+        }))
+      )
+    );
+  }, [clearAllTimeouts, setGrid]);
+
+  const clearWalls = useCallback(() => {
+    clearAllTimeouts();
+    setGrid((prevGrid) =>
+      prevGrid.map((row) =>
+        row.map((node) => ({
+          ...node,
+          // isPath: false,
+          // distance: Infinity,
+          // isVisualized: false,
+          // isVisited: false,
+          // previousNode: null,
+          // weight: 1,
+          isWall: false,
+        }))
+      )
+    );
+  }, [clearAllTimeouts, setGrid]);
+
   const resetForVisualization = useCallback(() => {
     clearAllTimeouts();
     setGrid((prevGrid) => {
@@ -49,24 +84,6 @@ export const useVisualization = (grid, setGrid) => {
         }))
       );
     });
-  }, [clearAllTimeouts, setGrid]);
-
-  const clearWeightedBoard = useCallback(() => {
-    clearAllTimeouts();
-    setGrid((prevGrid) =>
-      prevGrid.map((row) =>
-        row.map((node) => ({
-          ...node,
-          isWall: false,
-          isVisited: false,
-          isPath: false,
-          distance: Infinity,
-          isVisualized: false,
-          isVisited: false,
-          previousNode: null,
-        }))
-      )
-    );
   }, [clearAllTimeouts, setGrid]);
 
   // Function to animate Dijkstra's algorithm
@@ -116,7 +133,8 @@ export const useVisualization = (grid, setGrid) => {
   return {
     visualize,
     clearBoard,
-    clearWeightedBoard,
+    clearWeights,
+    clearWalls,
     resetForVisualization,
     resetForMaze,
   };

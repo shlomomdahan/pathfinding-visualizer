@@ -33,19 +33,19 @@ const Description = () => {
           <p>This quick guide will help you get started:</p>
           <ul>
             <li>
-              <span className="start">Start Node</span>: Click and drag the
-              green node to set the start position.
+              <span className="start">Start Node</span>Click and drag the green
+              node to set the start position.
             </li>
             <li>
-              <span className="finish">Finish Node</span>: Click and drag the
-              red node to set the finish position.
+              <span className="finish">Finish Node</span>Click and drag the red
+              node to set the finish position.
             </li>
             <li>
-              <span className="wall">Add Wall</span>: Click on a node to create
-              a wall.
+              <span className="wall">Add Wall</span>Click on a node to create a
+              wall.
             </li>
             <li>
-              <span className="shift">Add Weight</span>: Hold the Shift key and
+              <span className="shift">Add Weight</span>Hold the Shift key and
               click on a node to add weight
             </li>
           </ul>

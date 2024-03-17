@@ -1,90 +1,86 @@
-/* Enhanced Toolbar Styles */
+/* Base styles for body to ensure proper font size is set for em calculations */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding does not affect overall width */
+}
 
+/* Enhanced Toolbar Styles */
 .toolbar {
   display: flex;
   justify-content: center;
-  padding: 10px;
-  background-color: #033f83; /* Darker shade for more professional look */
-  gap: 20px; /* Increased gap for better spacing */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-
+  padding: 1em; /* Use em for scalable padding */
+  background-color: #033f83;
+  gap: 2vw; /* Use vw for a viewport width relative gap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
 }
 
-/* Style for buttons */
+/* Style adjustments for buttons using em units */
 button {
-  padding: 10px 20px; /* More horizontal padding for a wider button */
-  margin-right: 10px;
-  background-color: #066bc5; /* Slightly lighter blue for contrast */
+  padding: 0.625em 1.25em; /* Adjusted to em for scalability */
+  margin-right: 0.625em; /* Adjusted to em */
+  background-color: #066bc5;
   color: white;
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners for buttons */
-  font-weight: bold; /* Make text bold */
-  cursor: pointer; /* Cursor pointer to indicate clickability */
-  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #73531c; /* Darken button on hover for feedback */
+  background-color: #73531c;
 }
 
-/* Dropdown Button */
+/* Dropdown Styles */
 .dropbtn {
-  background-color: #357a32; /* Consistent with button hover state */
-  /* Other styles inherited from button */
+  background-color: #357a32;
 }
 
-/* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
-  border-radius: 4px; /* Rounded corners */
-  overflow: hidden; /* Ensures rounded corners contain links */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
   z-index: 1001;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
-  color: #034f84; /* Darker text color for contrast */
+  color: #034f84;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  transition: background-color 0.3s;
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Hover effect for links inside the dropdown */
 .dropdown-content a:hover {
-  background-color: #d1e7ff; /* Soft blue background on hover */
-  color: #022a5e; /* Darker blue text for better contrast */
+  background-color: #d1e7ff;
+  color: #022a5e;
 }
 
-/* General Enhancements */
-* {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
-}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column; /* Stack toolbar items vertically */
+    padding: 0.5em; /* Reduce padding */
+    gap: 0.5em; /* Reduce gap */
+  }
 
-/* Weighted Graph Button */
-.button.weighted-graph-button {
-  background-color: #ff0000; /* Red color */
-}
+  button {
+    padding: 0.5em 1em; /* Reduce button size */
+    margin-right: 0; /* Adjust margin */
+    font-size: 0.8em; /* Reduce font size */
+  }
 
-.button.weighted-graph-button:hover {
-  background-color: #cc0000; /* Darker red on hover */
-}
-
-/* Weighted Graph Button */
-.button.unweighted-graph-button {
-  background-color: #efab3f; /* Red color */
-}
-
-.button.unweighted-graph-button:hover {
-  background-color: #ff9500; /* Darker red on hover */
+  .dropdown-content {
+    min-width: 120px; /* Adjust dropdown width */
+  }
 }

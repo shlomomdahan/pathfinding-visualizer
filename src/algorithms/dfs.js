@@ -21,4 +21,5 @@ export function dfs(grid, startNode, finishNode) {
       stack.push(neighbor);
     }
   }
+  return visitedNodesInOrder;
 }

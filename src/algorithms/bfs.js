@@ -21,4 +21,5 @@ export function bfs(grid, startNode, finishNode) {
       queue.push(neighbor);
     }
   }
+  return visitedNodesInOrder;
 }

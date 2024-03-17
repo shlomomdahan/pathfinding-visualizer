@@ -45,7 +45,7 @@ export function astar(grid, startNode, finishNode) {
     }
   }
 
-  return [];
+  return visitedNodesInOrder;
 }
 
 function createAStarGrid(grid) {

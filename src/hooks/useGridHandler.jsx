@@ -22,7 +22,8 @@ export const useGridHandler = (grid, setGrid) => {
         const newGrid = grid.map((gridRow, gridRowIndex) =>
           gridRow.map((node, nodeColIndex) => {
             if (gridRowIndex === row && nodeColIndex === col) {
-              return { ...node, weight: 30 }; // Setting weight to 30
+              const newWeight = node.weight === 30 ? 1 : 30; // Toggle weight between 30 and 1
+              return { ...node, weight: newWeight };
             }
             return node;
           })
@@ -48,7 +49,8 @@ export const useGridHandler = (grid, setGrid) => {
           newGrid = grid.map((gridRow, gridRowIndex) =>
             gridRow.map((node, nodeColIndex) => {
               if (gridRowIndex === row && nodeColIndex === col) {
-                return { ...node, weight: 30 }; // Set weight to 30 for drag over
+                const newWeight = node.weight === 30 ? 1 : 30; // Toggle weight between 30 and 1 for drag over
+                return { ...node, weight: newWeight };
               }
               return node;
             })

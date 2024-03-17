@@ -52,6 +52,18 @@ const Toolbar = ({
       className: "clear-board-button",
     },
     {
+      type: "button",
+      label: "Clear Path",
+      actionKey: "clearPath",
+      className: "clear-path-button",
+    },
+    // {
+    //   type: "button",
+    //   label: "Clear Weights",
+    //   actionKey: "clearWeights",
+    //   className: "clear-weights-button",
+    // },
+    {
       type: "dropdown",
       label: "Mazes",
       items: mazeItems,

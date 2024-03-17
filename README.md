@@ -7,7 +7,6 @@ This project is a visual representation of various pathfinding algorithms in act
 - **Visualize Algorithms**: See how Dijkstra, A*, BFS, and DFS algorithms find the shortest path.
 - **Interactive Grid**: Click and drag to set start and end nodes, create walls, and add weights.
 - **Algorithm and Maze Generation**: Select different algorithms and maze generation techniques.
-- **Step-by-Step and Speed Control**: Control the visualization speed and step through the algorithm's process.
 
 
 ![Pathfinding Visualizer Demo](pathfinder.gif)

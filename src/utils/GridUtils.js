@@ -1,5 +1,5 @@
 const NUM_ROWS = 30;
-const NUM_COLS = 58;
+const NUM_COLS = 55;
 
 export function initialGrid() {
   const grid = [];

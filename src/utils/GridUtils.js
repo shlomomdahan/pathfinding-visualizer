@@ -1,17 +1,5 @@
-// export const initialGrid = (rows = 30, cols = 50) => {
-//   const grid = [];
-//   for (let row = 0; row < rows; row++) {
-//     const currentRow = [];
-//     for (let col = 0; col < cols; col++) {
-//       currentRow.push(createNode(col, row));
-//     }
-//     grid.push(currentRow);
-//   }
-//   return grid;
-// };
-
 const NUM_ROWS = 30;
-const NUM_COLS = 50;
+const NUM_COLS = 58;
 
 export function initialGrid() {
   const grid = [];
@@ -28,8 +16,8 @@ export function initialGrid() {
 export const createNode = (col, row, isWeightedGraph) => ({
   col,
   row,
-  isStart: row === 5 && col === 5,
-  isFinish: row === 25 && col === 45,
+  isStart: row === 3 && col === 5,
+  isFinish: row === 26 && col === 52,
   isVisited: false,
   isVisualized: false,
   isPath: false,

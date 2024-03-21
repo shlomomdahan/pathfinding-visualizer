@@ -1,71 +1,37 @@
-// import React, { useState, useEffect } from "react";
-// import "./App.css";
-// import PathfindingVisualizer from "./components/PathfindingVisualizer";
-// import Description from "./components/Description"; // Ensure the path is correct
-// import Modal from "react-modal";
-// Modal.setAppElement("#root"); // Assuming your app root element has the id 'root'
-
-// function App() {
-//   const [isFullScreenRecommended, setIsFullScreenRecommended] = useState(
-//     window.innerWidth > 1400
-//   );
-//   const [isModalOpen, setIsModalOpen] = useState(true); // Modal is open by default
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setIsFullScreenRecommended(window.innerWidth > 1400);
-//     };
-
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   const toggleModal = () => setIsModalOpen(!isModalOpen); // Function to toggle modal visibility
-
-//   return (
-//     <div className="App">
-//       {isFullScreenRecommended ? (
-//         <>
-//           <button onClick={toggleModal} className="modal-toggle">
-//             Help
-//           </button>
-//           {isModalOpen && (
-//             <div className="modal">
-//               <Description />
-//             </div>
-//           )}
-//           <PathfindingVisualizer />
-//         </>
-//       ) : (
-//         <div className="fullScreenMessage">
-//           This app is meant to be used in full screen. Please increase the
-//           window size until this message disappears.
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import PathfindingVisualizer from "./components/PathfindingVisualizer";
 import Description from "./components/Description"; // Ensure the path is correct
-import Modal from "react-modal";
-Modal.setAppElement("#root"); // Assuming your app root element has the id 'root'
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(true); // Modal is open by default
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const toggleModal = () => setIsModalOpen(!isModalOpen); // Function to toggle modal visibility
+  // Function to update the window width state
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  // Use useEffect to add window resize event listener on component mount
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // You can adjust the threshold width (e.g., 768px here) as needed
+  const shouldShowModal = windowWidth > 768 && isModalOpen;
 
   return (
     <div className="App">
-      {/* <button onClick={toggleModal} className="modal-toggle">
+      {/* Optionally, toggle modal visibility with a button
+      <button onClick={() => setIsModalOpen(!isModalOpen)} className="modal-toggle">
         Help
       </button> */}
-      {isModalOpen && (
+      {shouldShowModal && (
         <div className="modal">
           <Description />
         </div>

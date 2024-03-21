@@ -48,14 +48,17 @@
 @media (max-width: 480px) {
   .weight-legend {
     padding: 12px;
+    display: none;
   }
 
   .weight-steps {
     flex-wrap: wrap;
     justify-content: space-evenly;
+    display: none;
   }
 
   .weight-step {
     margin: 2px;
+    display: none;
   }
 }

@@ -65,7 +65,7 @@ const Toolbar = ({
     // },
     {
       type: "dropdown",
-      label: "Mazes",
+      label: "Select Maze",
       items: mazeItems,
       className: "maze-dropdown",
     },

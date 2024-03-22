@@ -1,5 +1,5 @@
 // PathfindingVisualizer.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./PathfindingVisualizer.css";
 import { executeAlgorithm } from "../algorithms";
 import Node from "./Node";
@@ -12,9 +12,7 @@ import { dijkstra } from "../algorithms/dijkstra";
 import { dfs } from "../algorithms/dfs";
 import { bfs } from "../algorithms/bfs";
 import { astar } from "../algorithms/astar";
-import WeightLegend from "../components/weightLegend";
 import AlgorithmStats from "./algorithmStats";
-import Description from "./Description";
 import { FaGithub } from "react-icons/fa";
 
 const algorithms = [

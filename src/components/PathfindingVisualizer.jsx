@@ -15,6 +15,7 @@ import { astar } from "../algorithms/astar";
 import WeightLegend from "../components/weightLegend";
 import AlgorithmStats from "./algorithmStats";
 import Description from "./Description";
+import { FaGithub } from "react-icons/fa";
 
 const algorithms = [
   { label: "Dijkstra", actionKey: "dijkstra", func: dijkstra },
@@ -177,12 +178,7 @@ const PathfindingVisualizer = () => {
           <a href="https://github.com/shlomomdahan/pathfinding-visualizer">
             Source Code
           </a>
-          <img
-            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-            alt="GitHub"
-            width="30"
-            height="30"
-          />
+          <FaGithub size={30} />
         </div>
         <h5 className="name">by Shlomo Dahan</h5>
       </div>

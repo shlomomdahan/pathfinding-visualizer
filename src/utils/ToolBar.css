@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 1em; /* Use em for scalable padding */
-  background-color: #033f83;
+  background-color: #1b3e67;
   gap: 2vw; /* Use vw for a viewport width relative gap */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
@@ -69,7 +69,7 @@ button:hover {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .toolbar {
-    flex-direction: column; /* Stack toolbar items vertically */
+    flex-direction: row; /* Stack toolbar items vertically */
     padding: 0.5em; /* Reduce padding */
     gap: 0.5em; /* Reduce gap */
   }

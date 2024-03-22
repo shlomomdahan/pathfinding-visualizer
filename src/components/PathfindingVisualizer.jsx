@@ -139,7 +139,7 @@ const PathfindingVisualizer = () => {
       />
       <div className="dashboard">
         <AlgorithmStats runtime={runtime} pathCost={pathCost} />
-        <WeightLegend />
+        {/* <WeightLegend /> */}
       </div>
       <div className="grid-wrapper">
         {" "}

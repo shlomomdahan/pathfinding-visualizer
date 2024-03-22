@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
-  padding: 20px;
+  gap: 20px; /* Reduced gap */
+  padding: 15px; /* Reduced padding */
   background: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
@@ -12,26 +12,26 @@
 
 .stat-item {
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  padding: 25px 35px;
+  border-radius: 8px; /* Slightly smaller radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow for a less heavy look */
+  padding: 15px 25px; /* Reduced padding */
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 120px;
-  min-height: 70px;
+  min-width: 100px; /* Slightly reduced for compactness */
+  min-height: 60px; /* Slightly reduced height */
   justify-content: space-around;
 }
 
 .stat-label {
   color: #555;
-  font-size: 18px;
-  margin-bottom: 5px;
+  font-size: 16px; /* Smaller font size */
+  margin-bottom: 3px; /* Reduced margin */
 }
 
 .stat-value {
   color: #222;
-  font-size: 22px;
+  font-size: 20px; /* Slightly smaller font size */
   font-weight: 600;
 }
 
@@ -43,7 +43,7 @@
 
   .stat-item {
     width: auto;
-    padding: 20px;
+    padding: 15px; /* Even more compact for smaller screens */
   }
 
   .stat-label,
@@ -53,7 +53,7 @@
 }
 
 .stat-icon {
-  width: 28px;
-  height: 28px;
-  margin-bottom: 15px;
+  width: 24px; /* Smaller icon size */
+  height: 24px; /* Smaller icon size */
+  margin-bottom: 10px; /* Adjusted spacing */
 }

@@ -183,8 +183,8 @@ const PathfindingVisualizer = () => {
             width="30"
             height="30"
           />
-          <h5 className="name">by Shlomo Dahan</h5>
         </div>
+        <h5 className="name">by Shlomo Dahan</h5>
       </div>
     </div>
   );

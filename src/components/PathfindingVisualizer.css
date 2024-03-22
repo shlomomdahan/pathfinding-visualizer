@@ -1,5 +1,9 @@
 .main {
   background-color: rgb(231, 231, 231);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .grid {
@@ -27,6 +31,7 @@
   border-radius: 8px;
   overflow: hidden;
 }
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -47,13 +52,14 @@
 
 .link-img-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 20px;
 }
 
 .name {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .dashboard {
@@ -63,6 +69,32 @@
   align-items: center;
   padding: 20px;
   gap: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 16px; /* Smaller font size for smaller screens */
+    padding: 15px; /* Smaller padding */
+  }
+
+  .footer h1 {
+    font-size: 16px; /* Adjusted h1 size for smaller screens */
+    margin-bottom: 2px;
+  }
+
+  .link-img-container {
+    margin: 10px 0; /* Add some margin for spacing */
+  }
+
+  .grid-wrapper {
+    padding: 1px; /* Reduce padding */
+    margin: 0;
+  }
+
+  .row {
+    flex-direction: column;
+  }
 }
 
 *,

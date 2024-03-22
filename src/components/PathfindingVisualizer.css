@@ -10,6 +10,10 @@
   justify-content: center;
 }
 
+.row {
+  display: flex;
+}
+
 .grid-wrapper {
   display: flex;
   justify-content: center;

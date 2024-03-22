@@ -9,9 +9,26 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   text-align: center;
+  height: 500px; /* Set a fixed height */
 }
+
+.scrollable-content {
+  overflow-y: auto;
+  flex-grow: 1; /* Ensure it takes up available space */
+  padding-bottom: 60px; /* Space for pagination controls */
+}
+
+.pagination-controls {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* No changes needed for other CSS */
 
 .algorithm-details,
 .maze-details,
@@ -56,12 +73,6 @@ p {
   font-size: 16px;
 }
 
-.pagination-controls {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-}
-
 span {
   align-self: center;
   color: #333;
@@ -73,7 +84,7 @@ span {
   top: 15px;
   right: 15px;
   font-size: 30px;
-  color: #bbb;
+  color: #0e0e0e;
   cursor: pointer;
   transition: color 0.3s, transform 0.2s;
 }
@@ -117,4 +128,36 @@ span {
 }
 .shift {
   background-color: #b0b0b0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .details-container {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .algorithm,
+  .maze-type,
+  .intro-page ul {
+    padding: 10px;
+  }
+
+  h2,
+  h3,
+  p,
+  .intro-page li {
+    margin-bottom: 15px;
+  }
+
+  .pagination-controls,
+  .algorithm-details,
+  .maze-details,
+  .intro-page {
+    flex-direction: column;
+  }
+
+  .intro-page span {
+    width: auto; /* Allow the text to determine size */
+  }
 }

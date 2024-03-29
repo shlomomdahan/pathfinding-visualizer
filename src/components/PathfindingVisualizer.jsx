@@ -12,12 +12,20 @@ import { dijkstra } from "../algorithms/dijkstra";
 import { dfs } from "../algorithms/dfs";
 import { bfs } from "../algorithms/bfs";
 import { astar } from "../algorithms/astar";
+import { gbfs } from "../algorithms/gbfs";
+import { bidirectional } from "../algorithms/bidirectional";
 import AlgorithmStats from "./algorithmStats";
 import { FaGithub } from "react-icons/fa";
 
 const algorithms = [
   { label: "Dijkstra", actionKey: "dijkstra", func: dijkstra },
   { label: "A*", actionKey: "astar", func: astar },
+  { label: "Greedy Best First Search", actionKey: "gbfs", func: gbfs },
+  {
+    label: "Bidirectional Search",
+    actionKey: "bidirectional",
+    func: bidirectional,
+  },
   { label: "Breadth First Search", actionKey: "bfs", func: bfs },
   { label: "Depth First Search", actionKey: "dfs", func: dfs },
 ];
